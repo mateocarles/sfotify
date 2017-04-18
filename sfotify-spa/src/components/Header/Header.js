@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logo from './sfotify.png';
-import ReactDOM from 'react-dom';
 import './Header.css';
 
 class Header extends Component {
@@ -8,7 +7,7 @@ class Header extends Component {
     return (
       <div className="Header">
         <img className="Header-img" src={logo} alt="Sfotify"></img>
-          </div>
+      </div>
     );
   }
 }
