@@ -1,3 +1,4 @@
+
 var FavoriteSongBox = require('../../components/FavoriteSongBox/FavoriteSongBox');
 var Footer = require('../../components/Footer/Footer');
 var Header = require('../../components/Header/Header');
@@ -42,3 +43,20 @@ class Home extends React.Component{
 }
 
 module.exports = Home;
+
+import React, { Component } from 'react';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+class Home extends Component {
+  render() {
+    return (
+      
+      <h1> HOME </h1>
+
+    );
+  }
+}
+
+export default Home;
+
+
