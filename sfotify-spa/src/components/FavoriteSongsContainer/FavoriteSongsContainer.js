@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FavoriteSongBox from  './FavoriteSongBox';
+import Request from 'superagent';
+import _ from 'lodash';
 
 class FavoriteSongsContainer extends Component {
   constructor(props) {
@@ -7,13 +9,29 @@ class FavoriteSongsContainer extends Component {
 
     this.state = {
       songs: [
-        'La bamba',
-        'Himno Nacional Argentino',
-        'Rock del pedazo'
       ]
     }
 
   }
+
+  componentWillMount() {
+    this.search();
+  }
+
+  uSearch(val) {
+    this.search(val);
+  }
+
+  search(val = "j") {
+    var url = `https://api.spotify.com/v1/search?type=artist&q=${val}`;
+    Request.get(url).then((response) => {
+      this.setState({
+        songs: response,        
+      });
+    });
+  }
+
+  
 
   render() {
     const songs = this.state.songs.map( (item, idx)  => {

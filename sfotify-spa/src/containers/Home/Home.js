@@ -1,63 +1,31 @@
 
-var FavoriteSongBox = require('../../components/FavoriteSongBox/FavoriteSongBox');
-var Footer = require('../../components/Footer/Footer');
-var Header = require('../../components/Header/Header');
-var InputSearch = require('../../components/InputSearch/InputSearch');
-var Subtitle = require('../../components/Subtitle/Subtitle');
-var Title = require( '../../components/Title/Title');
-var react = require('react');
+import FavoriteSongBox from '../../components/FavoriteSongsContainer/FavoriteSongBox';
+import Footer from '../../components/Footer/Footer';
+import Header from'../../components/Header/Header';
+import InputSearch from '../../components/InputSearch/InputSearch';
+import Subtitle from '../../components/Subtitle/Subtitle';
+import Title from '../../components/Title/Title';
+import FavoriteSongsContainer from '../../components/FavoriteSongsContainer/FavoriteSongsContainer';
+import React, { Component } from 'react';
+
 
 
 class Home extends React.Component{
 
     render() {
-
         return(
             <div className='content'>
-
-                <div className="header">
-                    <Header />
-                </div>
-
-                <div className="title">
-                    <Title />
-                </div>
-
-                 <div className="subTitle">
-                    <Subtitle />
-                </div>
-
-                <div className="inputSearch">
-                    <InputSearch />
-                </div>
-
-                  <div className="favoriteSongBox">
-                    <favoriteSongBox />
-                </div>
-
+                <Header />           
+                <Title />               
+                <Subtitle />          
+                <InputSearch />            
+                <favoriteSongBox />
+                <FavoriteSongsContainer />
             </div>
         )
-
     }
-
 }
 
-module.exports = Home;
-
-import React, { Component } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import FavoriteSongsContainer from '../../components/FavoriteSongsContainer/FavoriteSongsContainer';
-
-class Home extends Component {
-  render() {
-    return (
-      
-      <FavoriteSongsContainer />
-
-    );
-  }
-}
 
 export default Home;
-
 
