@@ -1,23 +1,23 @@
 {
-  "name": "sfotify",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "sfotify-spa",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
+    "bootstrap": "3",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
     "superagent": "^3.5.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "react-scripts": "0.9.5"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mateocarles/sfotify.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mateocarles/sfotify/issues"
-  },
-  "homepage": "https://github.com/mateocarles/sfotify#readme"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
