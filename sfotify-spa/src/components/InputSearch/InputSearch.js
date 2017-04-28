@@ -9,10 +9,13 @@ class InputSearch extends React.Component {
     super(props);
     this.state = {
       query: '',
-      songs: [],
+      artists: [],
       data: [],
       id: [],
-      albums: []
+      albums: [],
+      songs:[],
+      idAlb: [],
+      songsPrv: []
     }
   }
 
@@ -39,7 +42,7 @@ class InputSearch extends React.Component {
 
       console.log("El array: " + arr);
 
-      this.setState({songs: arr});
+      this.setState({artists: arr});
       this.setState({data: response.body.artists.items})
       this.setState({id:response.body.artists.items.id})
 
@@ -49,31 +52,79 @@ class InputSearch extends React.Component {
     });
   }
 
-handleClick(key){
-  
-  for(var i in this.state.data) {
-    if(this.state.data[i].name==key)
-    {
-      const id = this.state.data[i].id;
-      const url = ` https://api.spotify.com/v1/artists/${id}/albums`;
-      Request.get(url).then((response) => {
+  handleClickArtist(key){
+    
+    for(var i in this.state.data) {
+      if(this.state.data[i].name==key)
+      {
+        const id = this.state.data[i].id;
+        const url = ` https://api.spotify.com/v1/artists/${id}/albums`;
+        Request.get(url).then((response) => {
 
 
-        var arrAlb = [];
+          var albArray = [];
+          var albIdArray = [];
 
 
-        for (var i in response.body.items) {
-        arrAlb.push(response.body.items[i].name);
-        }
-      
-        this.setState({albums: arrAlb})
+          for (var i in response.body.items) {
+            albArray.push(response.body.items[i].name);
+            albIdArray.push(response.body.items[i].id);
+          }
+
+        
+        
+          this.setState({albums: albArray})
+          this.setState({idAlb: albIdArray})
+
+          console.log(albIdArray);
+         
+        });
+      }
+    }  
+  }
+  handleClickAlbum(key){
+    
+    for(var i in this.state.albums) {
+      if(this.state.albums[i]===key) {             
+        
+        const id = this.state.idAlb[i];
+        const url = ` https://api.spotify.com/v1/albums/${id}`;
+        Request.get(url).then((response) => {
 
 
-      });
+          var arrSongs = [];
+          var arrPrv = [];
+
+          for (var i in response.body.tracks.items) {
+            arrSongs.push(response.body.tracks.items[i].name);
+            arrPrv.push(response.body.tracks.items[i].preview_url);
+          }
+          
+          
+          this.setState({songs: arrSongs})
+          this.setState({songsPrv: arrPrv})
+
+          
+        });
+      }
+    } 
+  }
+
+  handleClickSong(key) {
+    for(var i in this.state.songs) {
+      if(this.state.songs[i]===key) {
+
+        const id = this.state.songsPrv[i];
+        const url = `${id}`
+        Request.get(url).then((response) => {
+
+
+        })
+
+      }
     }
-  }  
-}
-
+    
+  }
 
   render() {
     var self = this;
@@ -81,19 +132,31 @@ handleClick(key){
       <div>
         <input type="text" ref="val" onChange={this.handleChange.bind(this)} id="inputSearch" placeholder="Search the name of your favorite artist"/>
         <ul>
-          {this.state.songs.map(function(listValue,i){
+          {this.state.artists.map(function(listValue,i){
             return <li key={i}><a  href="#" onClick={() =>{
-              {self.handleClick(listValue)}
+              {self.handleClickArtist(listValue)}
             }}>{listValue}</a></li>;
           })}
         </ul>
+
+
+
         <h2>Albums</h2>
          <ul>
           {this.state.albums.map(function(listAlbum,i){
-            return <li key={i}>{listAlbum}</li>;
+            return <li key={i}><a  href="#" onClick={() =>{
+              {self.handleClickAlbum(listAlbum)}
+            }}>{listAlbum}</a></li>;
           })}
         </ul>
-
+       
+        <h2>Songs input</h2>
+        
+        <ul>
+           {this.state.songs.map(function(listSong,i){
+            return <li key={i}><a  href={self.state.songsPrv[i]}>{listSong}</a></li>;
+          })}
+        </ul>
         
       </div>
     )
